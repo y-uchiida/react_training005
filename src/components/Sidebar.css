@@ -18,14 +18,20 @@ button {
 	display: flex;
 	justify-content: space-between;
 	padding: 25px;
+	height: 120px;
+	max-height: 120px;
 }
 
 .app-sidebar-header{
 	margin: 0;
 }
 
+.app-sidebar-header h1{
+	margin: 0;
+}
+
 .app-sidebar-notes{
-	height: calc(100vh - 78px);
+	height: calc(100vh - 120px);
 	overflow-y: scroll;
 }
 
