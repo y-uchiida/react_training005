@@ -8,6 +8,8 @@ function App() {
 
   const [notes, setNotes] = useState<note[]>([]);
 
+  const [activeNote, setActiveNote] = useState('');
+
   /** 新しいノートを追加する */
   const onAddNote: React.MouseEventHandler<HTMLButtonElement> = () => {
     const newNote: note = {
@@ -26,7 +28,7 @@ function App() {
 
   return (
     <div className="App">
-      <Sidebar notes={notes} onAddNote={onAddNote} onDeleteNote={onDeleteNote} />
+      <Sidebar notes={notes} onAddNote={onAddNote} onDeleteNote={onDeleteNote} activeNote={activeNote} setActiveNote={setActiveNote} />
       <Main />
     </div>
   )

@@ -5,9 +5,11 @@ type props = {
 	notes: note[],
 	onAddNote: React.MouseEventHandler<HTMLButtonElement>,
 	onDeleteNote: Function,
+	activeNote: string
+	setActiveNote: React.Dispatch<React.SetStateAction<string>>
 }
 
-export const Sidebar = ({ notes, onAddNote, onDeleteNote }: props) => {
+export const Sidebar = ({ notes, onAddNote, onDeleteNote, activeNote, setActiveNote }: props) => {
 	return (
 		<div className='app-sidebar'>
 			<div className='app-sidebar-header'>
@@ -16,7 +18,10 @@ export const Sidebar = ({ notes, onAddNote, onDeleteNote }: props) => {
 			</div>
 			<div className='app-sidebar-notes'>
 				{notes.map(note => (
-					<div className="app-sidebar-note" key={note.id}>
+					<div
+						className={`app-sidebar-note ${note.id === activeNote && 'active'}`}
+						key={note.id}
+						onClick={() => setActiveNote(note.id)}>
 						<div className='sidebar-note-title'>
 							<strong>{note.title}</strong>
 							{/* 
