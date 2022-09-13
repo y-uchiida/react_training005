@@ -3,10 +3,11 @@ import './Sidebar.css'
 
 type props = {
 	notes: note[],
-	onAddNote: React.MouseEventHandler<HTMLButtonElement>
+	onAddNote: React.MouseEventHandler<HTMLButtonElement>,
+	onDeleteNote: Function,
 }
 
-export const Sidebar = ({ notes, onAddNote }: props) => {
+export const Sidebar = ({ notes, onAddNote, onDeleteNote }: props) => {
 	return (
 		<div className='app-sidebar'>
 			<div className='app-sidebar-header'>
@@ -18,7 +19,11 @@ export const Sidebar = ({ notes, onAddNote }: props) => {
 					<div className="app-sidebar-note" key={note.id}>
 						<div className='sidebar-note-title'>
 							<strong>{note.title}</strong>
-							<button>削除</button>
+							{/* 
+							  idを引数で渡す必要があるので、イベントハンドラをアロー関数にしておき、そこからonDelete()を実行する
+							  イベントハンドラはEventHandler 関数である必要があり、引数はイベントオブジェクトが渡ってきてしまう
+							  */}
+							<button onClick={() => onDeleteNote(note.id)}>削除</button>
 						</div>
 						<p>{note.content}</p>
 						<small>

@@ -19,9 +19,14 @@ function App() {
     setNotes([...notes, newNote]);
   }
 
+  /** 指定のIDのノートを削除する */
+  const onDeleteNote = (id: string) => {
+    setNotes(notes.filter(note => note.id !== id));
+  }
+
   return (
     <div className="App">
-      <Sidebar notes={notes} onAddNote={onAddNote} />
+      <Sidebar notes={notes} onAddNote={onAddNote} onDeleteNote={onDeleteNote} />
       <Main />
     </div>
   )
