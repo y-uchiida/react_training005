@@ -31,10 +31,20 @@ function App() {
     return notes.find(note => note.id === activeNote);
   }
 
+  /** 引数で受け取ったノートのデータを、notes のstateに取り込む */
+  const onUpdateNote = (updatedNote: note) => {
+    const updatedNotes = notes.map((note) => {
+      /* 更新対象のデータのとき(idが一致するとき)は更新後のデータを返し、それ以外は現状のデータのまま */
+      return (note.id === updatedNote.id) ? updatedNote : note;
+    });
+    /* 更新内容を取り込んだnotes 配列をstateにセットする */
+    setNotes(updatedNotes);
+  }
+
   return (
     <div className="App">
       <Sidebar notes={notes} onAddNote={onAddNote} onDeleteNote={onDeleteNote} activeNote={activeNote} setActiveNote={setActiveNote} />
-      <Main activeNote={getActiveNote()} />
+      <Main activeNote={getActiveNote()} onUpdateNote={onUpdateNote} />
     </div>
   )
 }
