@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { Sidebar } from './components/Sidebar'
 import { Main } from './components/Main'
@@ -6,9 +6,24 @@ import uuid from 'react-uuid'
 
 function App() {
 
-  const [notes, setNotes] = useState<note[]>([]);
+  /* localStorage に保存された値を取得する
+   * 初めての利用時など、notesが存在しない場合(getItem の結果がnullなとき)があるので、
+   * null 合体演算子で対応しておく
+   */
+  const [notes, setNotes] = useState<note[]>(JSON.parse(localStorage.getItem('notes') ?? '{}'));
 
   const [activeNote, setActiveNote] = useState<string | undefined>(undefined);
+
+  /* useEffect で、notes のstate に差分が生じるたびに実行される処理を記述
+   * ここでデータの保存(localStorage への書き込み)を行う
+   */
+  useEffect(() => {
+    localStorage.setItem('notes', JSON.stringify(notes));
+  }, [notes]);
+
+  useEffect(() => {
+    setActiveNote(notes[0]?.id);
+  }, []);
 
   /** 新しいノートを追加する */
   const onAddNote: React.MouseEventHandler<HTMLButtonElement> = () => {

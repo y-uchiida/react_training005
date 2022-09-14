@@ -20,7 +20,7 @@ export const Main = ({ activeNote, onUpdateNote }: props) => {
 	}
 
 	if (!activeNote) {
-		return <div className='no-active-note'>select note from list</div>
+		return <div className='no-active-note'>select or create note</div>
 	}
 
 	return (
