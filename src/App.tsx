@@ -8,7 +8,7 @@ function App() {
 
   const [notes, setNotes] = useState<note[]>([]);
 
-  const [activeNote, setActiveNote] = useState('');
+  const [activeNote, setActiveNote] = useState<string | undefined>(undefined);
 
   /** 新しいノートを追加する */
   const onAddNote: React.MouseEventHandler<HTMLButtonElement> = () => {
@@ -26,10 +26,15 @@ function App() {
     setNotes(notes.filter(note => note.id !== id));
   }
 
+  /** 選択されているノートのオブジェクトを取得する */
+  const getActiveNote = () => {
+    return notes.find(note => note.id === activeNote);
+  }
+
   return (
     <div className="App">
       <Sidebar notes={notes} onAddNote={onAddNote} onDeleteNote={onDeleteNote} activeNote={activeNote} setActiveNote={setActiveNote} />
-      <Main />
+      <Main activeNote={getActiveNote()} />
     </div>
   )
 }

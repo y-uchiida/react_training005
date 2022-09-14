@@ -1,6 +1,14 @@
-.app-main{
+.app-main,
+.no-active-note{
 	width: 70%;
 	height: 100vh;
+}
+
+.no-active-note {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #666;
 }
 
 .app-main-note-edit,

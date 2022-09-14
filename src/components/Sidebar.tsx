@@ -5,8 +5,8 @@ type props = {
 	notes: note[],
 	onAddNote: React.MouseEventHandler<HTMLButtonElement>,
 	onDeleteNote: Function,
-	activeNote: string
-	setActiveNote: React.Dispatch<React.SetStateAction<string>>
+	activeNote: string | undefined,
+	setActiveNote: React.Dispatch<React.SetStateAction<string | undefined>>
 }
 
 export const Sidebar = ({ notes, onAddNote, onDeleteNote, activeNote, setActiveNote }: props) => {
