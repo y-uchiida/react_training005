@@ -10,6 +10,10 @@ type props = {
 }
 
 export const Sidebar = ({ notes, onAddNote, onDeleteNote, activeNote, setActiveNote }: props) => {
+
+	/* 更新日の新しい順に、ノートのデータを並び替える */
+	const sortedNotes = notes.sort((a, b) => b.modDate - a.modDate);
+
 	return (
 		<div className='app-sidebar'>
 			<div className='app-sidebar-header'>
@@ -17,7 +21,7 @@ export const Sidebar = ({ notes, onAddNote, onDeleteNote, activeNote, setActiveN
 				<button onClick={onAddNote}>追加</button>
 			</div>
 			<div className='app-sidebar-notes'>
-				{notes.map(note => (
+				{sortedNotes.map(note => (
 					<div
 						className={`app-sidebar-note ${note.id === activeNote && 'active'}`}
 						key={note.id}
